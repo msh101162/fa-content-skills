@@ -95,11 +95,14 @@ class TestNormalizePipeline:
     def test_technical_tokens_survive_spacing(self):
         # regression: «requirements.txt» / «example.com» / «1,000» must
         # never gain a space inside the token (sentence rule is
-        # Persian-context only)
+        # Persian-context only). Digits unify to Persian: «۱,۰۰۰».
         out = normalize("با pip پکیج requirements.txt را نصب کن و به example.com سر بزن؛ 1,000 بار")
         assert "requirements.txt" in out
         assert "example.com" in out
-        assert "1,000" in out
+        assert "۱,۰۰۰" in out
+        assert "requirements. txt" not in out
+        assert "example. com" not in out
+        assert "۱, ۰۰۰" not in out
 
     def test_full_pipeline_keeps_compounds(self):
         text = "در دنیای امروز،  نرم‌افزارهای جدید 2024 را می‌بینید؟"
