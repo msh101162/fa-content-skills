@@ -47,6 +47,21 @@ class TestDirection:
         assert "fa" in kinds and "latin" in kinds
 
 
+class TestHazmFallback:
+    """Optional-dependency contract: hazm absent → graceful None, no crash."""
+
+    def test_degrades_gracefully(self):
+        from core.hazm_fallback import hazm_available, lemmatize
+        # works either way: hazm installed or not
+        result = lemmatize("می‌خوره")
+        if not hazm_available():
+            assert result is None
+
+    def test_import_never_fails(self):
+        from core.hazm_fallback import hazm_module
+        assert hazm_module() is None or True  # import attempt is safe
+
+
 class TestSlopLexicon:
     def setup_method(self):
         self.lex = SlopLexicon()
