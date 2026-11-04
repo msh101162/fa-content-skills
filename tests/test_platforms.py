@@ -143,7 +143,9 @@ class TestTwitterThread:
 
     def test_numbering_persian_digits(self):
         th = thread_from_text("جمله یک اینجاست. جمله دو اینجاست. " + " ".join(["متن"] * 400))
-        assert th.tweets[0].badge == f"(۱/{len(th.tweets).__str__()})".replace("۱/گ", "") or th.tweets[0].badge.startswith("(۱/")
+        n = len(th.tweets)
+        fa_total = {"1": "۱", "2": "۲", "3": "۳", "4": "۴", "5": "۵", "6": "۶", "7": "۷", "8": "۸", "9": "۹"}[str(n)] if n <= 9 else str(n)
+        assert th.tweets[0].badge == f"(۱/{fa_total})"
 
     def test_max_tweets_guard(self):
         with pytest.raises(ValueError):
