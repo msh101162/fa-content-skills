@@ -230,9 +230,13 @@ def _fix_spacing(text: str) -> str:
         text = re.sub(rf" +{re.escape(ch)}", ch, text)
     for ch in _NO_SPACE_AFTER:
         text = re.sub(rf"{re.escape(ch)} +", ch, text)
-    # exactly one space after terminal punctuation (Persian & Latin)
-    text = re.sub(r"([،؛؟!….]) (?=[^\s])", r"\1 ", text)
-    text = re.sub(rf"([{_PUNCT}])(?=[{_FA_LETTER}A-Za-z])", r"\1 ", text)
+    # exactly one space after Persian sentence punctuation (،؛؟!…) — these
+    # never occur inside technical tokens, so this is always safe.
+    text = re.sub(rf"([،؛؟!…])(?=[{_FA_LETTER}A-Za-z0-9\u06f0-\u06f9])", r"\1 ", text)
+    # Latin «.» «,» «:» ONLY when sandwiched between Persian letters
+    # (sentence context). «requirements.txt», «example.com», «1,000» and
+    # «https://» are technical tokens — untouched.
+    text = re.sub(rf"(?<=[{_FA_LETTER}])([.,:])(?=[{_FA_LETTER}A-Za-z0-9\u06f0-\u06f9])", r"\1 ", text)
     return text.strip()
 
 

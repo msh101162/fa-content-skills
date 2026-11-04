@@ -92,6 +92,15 @@ class TestNormalizePipeline:
     def test_ellipsis(self):
         assert normalize("چه اتفاقی...") == "چه اتفاقی…"
 
+    def test_technical_tokens_survive_spacing(self):
+        # regression: «requirements.txt» / «example.com» / «1,000» must
+        # never gain a space inside the token (sentence rule is
+        # Persian-context only)
+        out = normalize("با pip پکیج requirements.txt را نصب کن و به example.com سر بزن؛ 1,000 بار")
+        assert "requirements.txt" in out
+        assert "example.com" in out
+        assert "1,000" in out
+
     def test_full_pipeline_keeps_compounds(self):
         text = "در دنیای امروز،  نرم‌افزارهای جدید 2024 را می‌بینید؟"
         out = normalize(text)
