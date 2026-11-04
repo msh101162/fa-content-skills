@@ -70,5 +70,24 @@
 
 ## گراف دانش
 
-گراف کامل cross-repo در `graphify-out/` (HTML تعاملی + GRAPH_REPORT.md +
-graph.json) با ~۲۶۰۰ گره از ۴ مخزن — برای پیمایش روابط مهارت‌ها.
+گراف کامل cross-repo در `_analysis/graphify-out/` (HTML تعاملی +
+GRAPH_REPORT.md + graph.json) — از ۲۰۴ فایل مهارت‌محور ۴ مخزن:
+**۱۵۴۸ گره، ۳۲۴۷ یال، ۸۶ جامعه** (۹۵٪ EXTRACTED، میانگین اطمینان
+INFERRED: 0.83).
+
+**God Nodes** (پرپیوندترین‌ها — انتزاع‌های مرکزی):
+`report()` (۹۰ یال)، `trunc()` (۴۴)، `resolveVars()` (۴۲)،
+«Social Media Skill» (۳۴)، SKILL.md ورودی hallmark (۳۱).
+تفسیر برای بازآفرینی: هسته‌های لینتر/قالب (sloplint) گره‌های مرکزی
+هستند — همان الگوی «قاعده در یک فایل، ابزار سنجنده واحد» که ما در
+`core/` متمرکز کردیم.
+
+**اتصالات شگفت‌انگیز**:
+- «Signup Flow» ↔ «Popups» (شبیه‌سازی معنایی AMBIGUOUS) — دو CRO قالب
+- macrostructureهای hallmark ↔ ژانر editorial — رابطه ژانر-قالب
+- «Reverse Engineer Marketing» ↔ «Competitor Profiling» — زوج تحلیل رقیب
+
+**یافته بین‌مخزنی مهم**: شباهت‌های INFERRED بین مخزن‌ها (em-dash cap،
+فرمول‌های هوک، voice profile، «داده نه دستور») نشان می‌دهد الگوهای
+مشترک ~۷۰٪ بین بسته‌ها واقعاً برآورد درستی بود — معماری core/ مشترک
+این مخزن همان جدایش است، این‌بار با موتور فارسی بومی.
