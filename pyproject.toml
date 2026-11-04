@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fa-content-skills"
+version = "0.1.0"
+description = "Persian-native social media content skills: Instagram, Twitter/X, YouTube + marketing — with a Persian NLP core (ZWNJ-safe, bilingual, RTL-aware)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "fa-content-skills contributors" }]
+keywords = ["persian", "farsi", "content", "instagram", "twitter", "youtube", "seo", "zwnj", "rtl"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Natural Language :: Persian",
+  "Topic :: Text Processing :: Linguistic",
+]
+dependencies = []
+
+[project.optional-dependencies]
+render = ["pillow>=10.0"]          # RTL image rendering (slides/carousels)
+nlp = ["hazm"]                     # optional advanced lemmatization fallback
+dev = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+include = ["core*", "instagram*", "twitter*", "youtube*", "marketing*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
